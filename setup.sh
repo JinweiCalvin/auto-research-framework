@@ -31,6 +31,17 @@ clone_pinned "$I2P_URL" "$ROOT/idea2paper" "$I2P_COMMIT"
 mkdir -p "$ROOT/aris"
 clone_pinned "$ARIS_URL" "$ROOT/aris/auto-claude-code-research-in-sleep" "$ARIS_COMMIT"
 
+I2P_APP="$ROOT/idea2paper/frontend/server/app.py"
+APP_OVERLAY="$ROOT/patches/idea2paper/frontend/server/app.py"
+if ! cmp -s "$I2P_APP" "$APP_OVERLAY"; then
+  if ! git -C "$ROOT/idea2paper" diff HEAD --quiet -- frontend/server/app.py; then
+    echo "Refusing to overwrite a locally modified Idea2Paper app.py: $I2P_APP" >&2
+    exit 1
+  fi
+  cp "$APP_OVERLAY" "$I2P_APP"
+  echo "Applied the version-pinned local workspace dashboard adapter."
+fi
+
 if [[ ! -f "$ROOT/idea2paper/.env" ]]; then
   cp "$ROOT/idea2paper/.env.example" "$ROOT/idea2paper/.env"
   echo "Created idea2paper/.env; add your API credentials locally before running Idea2Paper."

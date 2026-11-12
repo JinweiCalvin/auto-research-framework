@@ -12,9 +12,9 @@ cd auto-research-framework
 bash setup.sh
 ```
 
-`setup.sh` 会下载固定版本的 Idea2Paper 与 ARIS、生成不含密钥的 `.env` 配置文件，并安装一组精选的文献/选题/实验/写作 ARIS Skills，加上本仓库的 `/anti-defensive-writing`。它不会建立 embedding 索引、运行模型、启动 GPU 作业或创建云资源。
+`setup.sh` 会下载固定版本的 Idea2Paper 与 ARIS、应用本机工作台适配层、生成不含密钥的 `.env` 配置文件，并安装一组精选的文献/选题/实验/写作 ARIS Skills，加上本仓库的 `/anti-defensive-writing`。它不会建立 embedding 索引、运行模型、启动 GPU 作业或创建云资源。
 
-设置好 `idea2paper/.env` 后，双击 macOS 的 `start-dashboard.command`，或运行：
+按部署指南在 `idea2paper/.venv` 安装 Python 依赖并设置好 `idea2paper/.env` 后，双击 macOS 的 `start-dashboard.command`，或运行：
 
 ```bash
 python3 tools/create_research_project.py research-projects/<project-name>
