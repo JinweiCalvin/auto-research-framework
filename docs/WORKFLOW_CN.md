@@ -126,7 +126,10 @@ python3 tools/package_idea2paper.py research-projects/<project-name> \
 | 实验 | `/experiment-plan` | 计划锁定后用 `/experiment-bridge`、`/run-experiment` |
 | 结果 | `/analyze-results` + `/result-to-claim` | 论文主张形成后加 `/experiment-audit` / `/paper-claim-audit` |
 | 审稿 | `/research-review` | 大修闭环、双模型意见互补时用 `/auto-review-loop` |
-| 写作 | `/paper-plan` + `/paper-writing` | 需要时加 `/anti-defensive-writing`、`/paper-figure`、`/paper-compile` |
+| 统计 | `/qinyan-nature-statistics` | 设计、估计目标、独立实验单位、报告与统计图表一致性 |
+| 图形 | `/qinyan-nature-figures` | 面板设计、数据映射、图注、导出和生成代码预检 |
+| 写作 | `/paper-plan` + `/qinyan-nature-writing` + `/paper-writing` | 行文修改用 `/qinyan-nature-polishing` 和 `/anti-defensive-writing` |
+| 定稿审查 | `/qinyan-nature-review` | 再配合 `/citation-audit`、`/paper-claim-audit`、`/paper-compile` |
 
 默认不运行完整 `/research-pipeline`、批量 reviewer、所有检索源或所有 Skills。它们覆盖范围更大，只有当任务目标和预算明确时再启用。
 

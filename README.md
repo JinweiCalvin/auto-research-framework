@@ -12,7 +12,7 @@ cd auto-research-framework
 bash setup.sh
 ```
 
-`setup.sh` 会下载固定版本的 Idea2Paper 与 ARIS、应用本机工作台适配层、生成不含密钥的 `.env` 配置文件，并安装一组精选的文献/选题/实验/写作 ARIS Skills，加上本仓库的 `/anti-defensive-writing`。它不会建立 embedding 索引、运行模型、启动 GPU 作业或创建云资源。
+`setup.sh` 会下载固定版本的 Idea2Paper 与 ARIS、应用本机工作台适配层、生成不含密钥的 `.env` 配置文件，并安装一组精选的 ARIS Skills。仓库还自带 `/anti-defensive-writing` 和 5 个 Nature 工作流 Skills，Codex 从项目目录打开后即可识别。安装不会建立 embedding 索引、运行模型、启动 GPU 作业或创建云资源。
 
 按部署指南在 `idea2paper/.venv` 安装 Python 依赖并设置好 `idea2paper/.env` 后，双击 macOS 的 `start-dashboard.command`，或运行：
 
@@ -27,6 +27,68 @@ python3 tools/create_research_project.py research-projects/<project-name>
 研究问题与约束 → 候选故事 → 文献与数据核查 → 人工确认研究主张 → 实验计划与预算关口 → sanity check → 正式实验 → 结果/引用审计 → 论文和 PDF。
 
 当前阶段只启用需要的工具。GPU、自动多轮审稿、研究 Wiki、额外检索源和视觉写作增强都是可选项。
+
+## Codex 使用教程
+
+### 怎样开始一个课题
+
+先创建项目目录，再把真实目标、现有材料和限制告诉 Codex。尽量提供文件路径，不要只说“帮我做研究”。
+
+```text
+请先阅读这个项目的 RESEARCH_BRIEF.md 和我提供的材料。
+研究目标是：[一句话说明目标]。
+现有数据/资源是：[数据、问卷、代码、GPU 或 API]。
+限制是：[截止日期、预算、目标期刊或不能做的事项]。
+先盘点证据和缺口，更新项目状态与下一步清单；不要编造数据、文献或结果，也不要在我确认研究方案前启动长时间实验。
+```
+
+### 怎样进行多轮对话
+
+把一个研究阶段作为一轮工作，每轮结束时要求 Codex 更新 `STAGE_STATUS.md`、保存产物路径、列出待确认事项和下一步。接续时直接说“继续”，或指出具体阶段/文件；Codex 应从项目记录续做，不必重复背景。
+
+建议顺序：问题与可行性 → 文献和数据核验 → 研究主张与方案确认 → 实验计划 → 小规模 sanity check → 正式实验 → 结果和引用审计 → 写作与独立审稿。每轮可以这样要求：
+
+```text
+继续这个课题。先查看 STAGE_STATUS.md 和最近的实验/决策记录，告诉我当前阶段与未解决事项，然后完成一个可以闭环的下一步。把结果写入对应文件，更新状态，并说明哪些结论有证据、哪些仍待确认。
+```
+
+### 怎样调度 Skills
+
+可在消息中直接写 Skill 名称，要求 Codex 读取并按其流程执行。按工作目标选择，不必每轮把所有 Skill 都跑一遍：
+
+| 目标 | 推荐调用 |
+|---|---|
+| 研究问题与文献 | `/idea-discovery`、`/research-lit`、`/novelty-check` |
+| 方案与实验 | `/experiment-plan`、`/qinyan-nature-statistics` |
+| 图表 | `/qinyan-nature-figures`，要求图可追溯到结果数据和生成代码 |
+| 论文结构与起草 | `/paper-plan`、`/qinyan-nature-writing`、`/paper-writing` |
+| 语言精修 | `/qinyan-nature-polishing`，再用 `/anti-defensive-writing` 检查防御性表达 |
+| 独立审查 | `/qinyan-nature-review`、`/citation-audit`、`/paper-claim-audit` |
+| PDF 与交付 | `/paper-compile`，并要求逐页检查图表、引用和交叉引用 |
+
+### 提示词示例
+
+**先审方案，不急着写稿：**
+
+```text
+请用 /research-review 和 /qinyan-nature-statistics 审查当前研究方案。先列出会影响结论的设计问题、需要的证据和可执行修改；区分“必须解决”和“可选增强”。不要替我假设数据已经支持研究假设。
+```
+
+**结果出来后再写：**
+
+```text
+只根据 experiments/ 中已完成且可复现的结果，用 /result-to-claim 建立主张-证据表，再用 /qinyan-nature-writing 重构 Results 和 Discussion。每个数字回链到结果文件；没有证据的内容标记为待确认，不得补造。
+```
+
+**多轮修改论文：**
+
+```text
+第 1 轮：用 /qinyan-nature-review 给 paper/main.tex 做独立审查，按严重度排序问题，不要直接重写全文。
+第 2 轮：我确认修改范围后，逐条处理重大问题，保留修改记录，并用 /anti-defensive-writing 检查行文。
+第 3 轮：用 /qinyan-nature-polishing 优化表达，用 /citation-audit 和 /paper-claim-audit 核对文献及数字，再编译 PDF 检查版面。
+```
+
+“Nature” Skills 提供结构、统计、表达、图表与审稿标准，不代表稿件达到特定期刊录用门槛。结论强度始终由研究设计和数据证据决定。
 
 ## 版本与边界
 

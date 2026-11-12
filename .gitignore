@@ -4,6 +4,8 @@
 .agents/skills/*
 !.agents/skills/anti-defensive-writing/
 !.agents/skills/anti-defensive-writing/SKILL.md
+!.agents/skills/qinyan-nature-*/
+!.agents/skills/qinyan-nature-*/**
 .aris/
 .claude/
 idea2paper/.env
