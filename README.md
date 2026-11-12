@@ -12,7 +12,7 @@ cd auto-research-framework
 bash setup.sh
 ```
 
-`setup.sh` 会下载固定版本的 Idea2Paper 与 ARIS、应用本机工作台适配层、生成不含密钥的 `.env` 配置文件，并安装一组精选的 ARIS Skills。仓库还自带 `/anti-defensive-writing` 和 5 个 Nature 工作流 Skills，Codex 从项目目录打开后即可识别。安装不会建立 embedding 索引、运行模型、启动 GPU 作业或创建云资源。
+`setup.sh` 会下载固定版本的 Idea2Paper 与 ARIS、应用本机工作台适配层、生成不含密钥的 `.env` 配置文件，并把项目维护者已启用的 60 个 ARIS Skills 安装到项目级 Skills 目录。仓库还自带 `/anti-defensive-writing` 和 5 个 Nature 工作流 Skills，Codex 从项目目录打开后即可识别。安装不会建立 embedding 索引、运行模型、启动 GPU 作业或创建云资源。
 
 按部署指南在 `idea2paper/.venv` 安装 Python 依赖并设置好 `idea2paper/.env` 后，双击 macOS 的 `start-dashboard.command`，或运行：
 
@@ -54,7 +54,7 @@ python3 tools/create_research_project.py research-projects/<project-name>
 
 ### 怎样调度 Skills
 
-可在消息中直接写 Skill 名称，要求 Codex 读取并按其流程执行。按工作目标选择，不必每轮把所有 Skill 都跑一遍：
+可在消息中直接写 Skill 名称，要求 Codex 读取并按其流程执行。完整 ARIS 已启用清单见 [`config/aris-skills.txt`](config/aris-skills.txt)；按工作目标选择，不必每轮把所有 Skill 都跑一遍：
 
 | 目标 | 推荐调用 |
 |---|---|

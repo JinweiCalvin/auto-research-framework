@@ -14,7 +14,7 @@ cd auto-research-framework
 bash setup.sh
 ```
 
-安装脚本固定拉取 README 中列出的两个上游 commit，避免默认追踪变化中的主分支。Idea2Paper 上游包含公开论文/知识图谱资产，首次检出约需数百 MB；向量索引仍由用户在需要时本机生成。脚本应用一个版本固定的 dashboard adapter，创建 `idea2paper/.env` 的本机副本，并为 Codex 安装精选的常用 ARIS Skills。适配器会在目标文件存在不同本地修改时停止，不覆盖该修改。安装失败时，先检查 Git、网络与 Codex CLI，再按 ARIS 官方文档单独安装。
+安装脚本固定拉取 README 中列出的两个上游 commit，避免默认追踪变化中的主分支。Idea2Paper 上游包含公开论文/知识图谱资产，首次检出约需数百 MB；向量索引仍由用户在需要时本机生成。脚本应用版本固定的 dashboard adapter，创建 `idea2paper/.env` 本机副本，并依据 `config/aris-skills.txt` 为 Codex 安装 60 个项目维护者已启用的 ARIS Skills。Nature 与防御性写作 Skills 直接随仓库提供。适配器会在目标文件存在不同本地修改时停止，不覆盖该修改。安装失败时，先检查 Git、网络与 Codex CLI，再按 ARIS 官方文档单独安装。
 
 ## 配置 Idea2Paper
 

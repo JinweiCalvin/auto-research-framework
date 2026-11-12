@@ -6,6 +6,7 @@ I2P_URL="https://github.com/AgentAlphaAGI/Idea2Paper.git"
 ARIS_URL="https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep.git"
 I2P_COMMIT="64170d4d9ca9068b26bd561648ce5c576bf1a2fb"
 ARIS_COMMIT="ed593c72011936adaef2d6e6cc57f98ce80f8b4e"
+ARIS_SKILLS="$(tr '\n' ',' < "$(dirname "${BASH_SOURCE[0]}")/config/aris-skills.txt" | sed 's/,$//')"
 
 for command in git python3; do
   command -v "$command" >/dev/null 2>&1 || { echo "Missing required command: $command" >&2; exit 1; }
@@ -53,7 +54,7 @@ if command -v codex >/dev/null 2>&1; then
   bash "$ROOT/aris/auto-claude-code-research-in-sleep/tools/install_aris_codex.sh" \
     "$ROOT" \
     --aris-repo "$ROOT/aris/auto-claude-code-research-in-sleep" \
-    --skills idea-discovery,research-lit,novelty-check,research-review,research-refine-pipeline,experiment-plan,run-experiment,monitor-experiment,analyze-results,result-to-claim,experiment-audit,paper-plan,paper-writing,citation-audit,paper-claim-audit,paper-compile,paper-figure \
+    --skills "$ARIS_SKILLS" \
     --skip-new --quiet --no-doc
 else
   echo "Codex CLI is not installed; ARIS skills were not installed. Install Codex and rerun setup.sh when ready."
