@@ -1,0 +1,10 @@
+# Project Instructions
+
+- Keep this repository generic. Do not add personal research data, unpublished manuscripts, run logs, API requests, local paths, or credentials.
+- Follow `docs/WORKFLOW_CN.md` for research stages and review gates.
+- Keep generated study material under `research-projects/<project>/`; raw/private data stays outside version control.
+- Every experiment result claim must be traceable to a run artifact. Preserve negative and failed runs.
+- Treat literature summaries and Idea2Paper outputs as candidate evidence until checked against original sources.
+- Apply `/anti-defensive-writing` by default to research prose while retaining limitations needed for accurate interpretation.
+- Before long, paid, remote, destructive, or public actions, make the concrete plan and scope visible to the user and honor their stated approval conditions.
+- Prefer the default small set of ARIS skills; enable optional workflows only when their inputs and costs are clear.
